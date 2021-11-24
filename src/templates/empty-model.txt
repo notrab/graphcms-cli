@@ -6,9 +6,9 @@ const migration = newMigration({
 });
 
 const {{apiId}} = migration.createModel({
+  displayName: "{{displayName}}",
   apiId: "{{apiId}}",
   pluralApiId: "{{pluralApiId}}",
-  displayName: "{{displayName}}",
 });
 
 // Please refer to https://github.com/GraphCMS/management-sdk for more info.

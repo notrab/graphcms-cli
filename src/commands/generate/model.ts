@@ -1,10 +1,12 @@
-import { Command, flags } from "@oclif/command";
+import { flags } from "@oclif/command";
 import cli from "cli-ux";
 import * as fs from "fs";
 import * as path from "path";
 import { renderFile } from "template-file";
 import * as pluralize from "pluralize";
+import * as prompts from "prompts";
 
+import Command from "../../base";
 import { createMigrationFileName } from "../../utils";
 
 export default class GenerateModelMigration extends Command {
@@ -31,15 +33,34 @@ generate:model Author
       char: "p",
       description: "plural api id",
     }),
-    directory: flags.string({
-      char: "d",
-      description: "directory for migrations",
-      default: "graphcms-migrations",
-    }),
+    ...Command.flags,
   };
 
   async run() {
     const { args, flags } = this.parse(GenerateModelMigration);
+
+    const questions: any = [
+      {
+        type: "text",
+        name: "displayName",
+        message: "display name?",
+        initial: args.displayName,
+      },
+      {
+        type: "text",
+        name: "apiId",
+        message: "api id?",
+        initial: args.apiId || args.displayName,
+      },
+      {
+        type: "text",
+        name: "pluralApiId",
+        message: "plural api id?",
+        initial: args.pluralApiId || pluralize(args.apiId || args.displayName),
+      },
+    ];
+
+    const answers = await prompts(questions);
 
     cli.action.start("generating filename");
     const fileName = createMigrationFileName(args.file);
@@ -48,13 +69,7 @@ generate:model Author
     cli.action.start("generating migration file");
     const renderedFile = await renderFile(
       path.join(__dirname, "..", "..", "templates", "empty-model.txt"),
-      {
-        displayName: args.displayName,
-        apiId: flags.apiId ?? args.displayName,
-        pluralApiId: pluralize(
-          flags.pluralApiId ? flags.pluralApiId : args.displayName
-        ),
-      }
+      answers
     );
 
     fs.writeFileSync(path.join(flags.directory, fileName), renderedFile);
