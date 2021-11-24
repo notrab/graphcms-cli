@@ -1,0 +1,30 @@
+const { FieldType, newMigration } = require('@graphcms/management');
+
+const migration = newMigration({
+  authToken: process.env.GRAPHCMS_TOKEN,
+  endpoint: process.env.GRAPHCMS_ENDPOINT,
+});
+
+// Here you can create new schema migrations, e.g.
+// 
+// const author = migration.createModel({
+//   apiId: "Author",
+//   apiIdPlural: "Authors",
+//   displayName: "Author",
+// });
+
+// author.addSimpleField({
+//   apiId: "firstName",
+//   displayName: "First Name",
+//   type: FieldType.String,
+// });
+
+// author.addSimpleField({
+//   apiId: "lastName",
+//   displayName: "Last Name",
+//   type: FieldType.String,
+// });
+
+// Please refer to https://github.com/GraphCMS/management-sdk for more info.
+
+module.exports = migration;

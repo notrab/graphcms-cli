@@ -1,0 +1,72 @@
+{
+  "name": "graphcms-cli",
+  "version": "0.0.0",
+  "author": "Jamie Barton @notrab",
+  "bin": {
+    "graphcms": "./bin/run"
+  },
+  "bugs": "https://github.com/notrab/graphcms-cli/issues",
+  "devDependencies": {
+    "@oclif/dev-cli": "^1.26.1",
+    "@types/mkdirp": "1.0.2",
+    "@types/node": "^10.17.60",
+    "@types/pluralize": "0.0.29",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.1.0",
+    "globby": "^10.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.10"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/notrab/graphcms-cli",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "graphcms",
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
+    "topics": {
+      "generate:migration": {
+        "description": "generate a new migration template file"
+      },
+      "generate:model": {
+        "description": "generate a new model migration"
+      }
+    }
+  },
+  "repository": "notrab/graphcms-cli",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "echo NO TESTS",
+    "version": "oclif-dev readme && git add README.md"
+  },
+  "types": "lib/index.d.ts",
+  "dependencies": {
+    "@oclif/command": "^1.8.4",
+    "@oclif/config": "^1.17.1",
+    "@oclif/plugin-help": "^3.2.6",
+    "cli-ux": "5.6.4",
+    "dotenv": "10.0.0",
+    "mkdirp": "1.0.4",
+    "pluralize": "8.0.0",
+    "slugify": "1.6.3",
+    "template-file": "6.0.0",
+    "tslib": "^1.14.1"
+  }
+}

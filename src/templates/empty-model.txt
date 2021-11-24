@@ -1,0 +1,16 @@
+const { FieldType, newMigration } = require('@graphcms/management');
+
+const migration = newMigration({
+  authToken: process.env.GRAPHCMS_TOKEN,
+  endpoint: process.env.GRAPHCMS_ENDPOINT,
+});
+
+const {{apiId}} = migration.createModel({
+  apiId: "{{apiId}}",
+  pluralApiId: "{{pluralApiId}}",
+  displayName: "{{displayName}}",
+});
+
+// Please refer to https://github.com/GraphCMS/management-sdk for more info.
+
+module.exports = migration;
