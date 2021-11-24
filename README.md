@@ -1,3 +1,5 @@
+NOT A OFFICIAL GRAPHCMS PROJECT
+
 # graphcms-cli
 
 Generate new, and execute pending migrations within your GraphCMS project.
